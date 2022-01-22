@@ -32,11 +32,7 @@ console.log(returnFirstArgument(10));
    sumWithDefaults(10) вернет 110
  */
 function sumWithDefaults(a, b = 100) {
-  let result = a + b;
-  for (let i = 2; i < arguments.length; i++) {
-    result += arguments[i];
-  }
-  return result;
+  return a + b;
 }
 console.log(sumWithDefaults(10, 50));
 
@@ -51,12 +47,8 @@ console.log(sumWithDefaults(10));
    returnFnResult(() => 'привет') вернет 'привет'
  */
 function returnFnResult(fn) {
-  function fn(a) {
-    var a = 10;
-  }
-  return fn(a);
+  return fn();
 }
-return returnFnResult(fn);
 
 /*
  Задание 4:
@@ -74,7 +66,11 @@ return returnFnResult(fn);
    console.log(f()); // выведет 12
    console.log(f()); // выведет 13
  */
-function returnCounter(number) {}
+function returnCounter(number = 0) {
+  return function () {
+    return ++number;
+  };
+}
 
 /*
  Задание 5 *:
@@ -85,7 +81,10 @@ function returnCounter(number) {}
  Пример:
    returnArgumentsArray(1, 2, 3) вернет [1, 2, 3]
  */
-function returnArgumentsArray() {}
+function returnArgumentsArray() {
+  return [...arguments];
+}
+console.log(returnArgumentsArray(1, 2, 3));
 
 /*
  Задание 6 *:
@@ -102,7 +101,9 @@ function returnArgumentsArray() {}
 
    console.log(newSum()) выведет 6
  */
-function bindFunction(fn, ...args) {}
+function bindFunction(fn, ...args) {
+  return fn.bind(null, ...args);
+}
 
 export {
   returnFirstArgument,
